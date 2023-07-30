@@ -8,7 +8,7 @@
     <link href="/2023/07/30/MIT6s081%20Lec1%20Introduction/"/>
     <url>/2023/07/30/MIT6s081%20Lec1%20Introduction/</url>
     
-    <content type="html"><![CDATA[<blockquote><p>MIT6.s081 操作系统课程的lecture 笔记第一篇: Introduction.</p><p>参考资料</p><p>课程视频中文翻译: <a href="https://github.com/huihongxiao/MIT6.S081/tree/master">https://github.com/huihongxiao/MIT6.S081/tree/master</a></p><p>xv6 中文文档: <a href="https://xv6-chinese.readthedocs.io/zh/latest/index.html">https://xv6-chinese.readthedocs.io/zh/latest/index.html</a></p></blockquote><h1 id="Lec1-Introduction"><a href="#Lec1-Introduction" class="headerlink" title="Lec1: Introduction"></a>Lec1: Introduction</h1><p>这门课程的目标:</p><ol><li>理解操作系统的设计和实现</li><li>通过一个小的XV6的操作系统获得实际动手经验</li></ol><h2 id="操作系统结构"><a href="#操作系统结构" class="headerlink" title="操作系统结构"></a>操作系统结构</h2>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>MIT6.s081 操作系统课程的lecture 笔记第一篇: Introduction.</p><p>参考资料</p><p>课程视频中文翻译: <a href="https://github.com/huihongxiao/MIT6.S081/tree/master">https://github.com/huihongxiao/MIT6.S081/tree/master</a></p><p>xv6 中文文档: <a href="https://xv6-chinese.readthedocs.io/zh/latest/index.html">https://xv6-chinese.readthedocs.io/zh/latest/index.html</a></p></blockquote><h1 id="Lec1-Introduction"><a href="#Lec1-Introduction" class="headerlink" title="Lec1: Introduction"></a>Lec1: Introduction</h1><p>这门课程的目标:</p><ol><li>理解操作系统的设计和实现</li><li>通过一个小的XV6的操作系统获得实际动手经验</li></ol><h2 id="操作系统结构"><a href="#操作系统结构" class="headerlink" title="操作系统结构"></a>操作系统结构</h2><p>操作系统结构即操作系统的内部组成,在计算机的底层包含硬件资源(CPU,内存,磁盘,网卡),运行在最上层的应用程序(例如文本编辑器,c编译器,shell等),这些程序运行在用户空间(User space)</p>]]></content>
     
     
     <categories>
