@@ -24,7 +24,7 @@
 <meta property="og:description" content="cs61c - Great Ideas in Computer Architecture (Machine Structures) lab 笔记第一篇">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-04T10:41:07.000Z">
-<meta property="article:modified_time" content="2023-08-05T08:23:18.827Z">
+<meta property="article:modified_time" content="2023-08-05T09:27:23.120Z">
 <meta property="article:author" content="John Titor">
 <meta property="article:tag" content="cs61c">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.1k 字
+          6.5k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          51 分钟
+          55 分钟
         
       </span>
     
@@ -384,10 +384,7 @@
 </tr>
 </tbody></table>
 <ul>
-<li>cond<ul>
-<li>表达式</li>
-</ul>
-</li>
+<li>cond 表达式</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">(gdb) b 7 if num&gt;10  //如果num&gt;10 在第 7 行打断点<br></code></pre></td></tr></table></figure>
 
@@ -478,12 +475,18 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c">...<br>arraylength = <span class="hljs-keyword">sizeof</span>(a)/<span class="hljs-keyword">sizeof</span>(a[<span class="hljs-number">0</span>]);<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;arraylength;j++)<br>    ...<br></code></pre></td></tr></table></figure></li>
 </ol>
 <h2 id="Exercise-5-Pointers-and-Structures-in-C"><a href="#Exercise-5-Pointers-and-Structures-in-C" class="headerlink" title="Exercise 5: Pointers and Structures in C"></a>Exercise 5: Pointers and Structures in C</h2><p>在ll_cycle.c中，完成函数ll_has_cycle()来实现以下检查单向链表是否有环的算法。</p>
+<blockquote>
 <ol>
 <li>Start with two pointers at the head of the list. We’ll call the first one tortoise and the second one hare.</li>
 <li>Advance hare by two nodes. If this is not possible because of a null pointer, we have found the end of the list, and therefore the list is acyclic.</li>
 <li>Advance tortoise by one node.</li>
 <li>If tortoise and hare point to the same node, the list is cyclic. Otherwise, go back to step 2.</li>
 </ol>
+</blockquote>
+<p><code>ll_cycle.c</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stddef.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;ll_cycle.h&quot;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">ll_has_cycle</span><span class="hljs-params">(node *head)</span> &#123;<br>    <span class="hljs-comment">/* your code here */</span><br>    <span class="hljs-keyword">if</span>(head == <span class="hljs-literal">NULL</span>)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br>    node *tortoise = head;<br>    node *hare = head-&gt;next;<br>    <span class="hljs-keyword">while</span>(tortoise != <span class="hljs-literal">NULL</span> &amp;&amp; hare != <span class="hljs-literal">NULL</span> &amp;&amp; hare-&gt;next != <span class="hljs-literal">NULL</span>)&#123;<br>        <span class="hljs-keyword">if</span>(tortoise == hare)&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125;<br>        tortoise = tortoise-&gt;next;<br>        hare = hare-&gt;next-&gt;next;<br>    &#125;   <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>解释算法原理<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cycle_detection#Floyd.27s_Tortoise_and_Hare">Wikipedia article</a></p>
 
                 
               </div>
