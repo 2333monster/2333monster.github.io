@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://inst.eecs.berkeley.edu/~cs61c/fa20/projects/proj1/conway.gif">
 <meta property="article:published_time" content="2023-08-05T09:32:39.000Z">
-<meta property="article:modified_time" content="2023-08-08T06:21:24.796Z">
+<meta property="article:modified_time" content="2023-08-08T10:46:39.229Z">
 <meta property="article:author" content="John Titor">
 <meta property="article:tag" content="cs61c">
 <meta name="twitter:card" content="summary_large_image">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.9k 字
+          5.3k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          33 分钟
+          44 分钟
         
       </span>
     
@@ -320,6 +320,10 @@
 <p>这里在上一步分配的指针数组中的每一个指针指向的位置，分配了一个<code>Color</code> 结构体的内存</p>
 <p><code>*(img-&gt;image + i)</code> 是一个 <code>Color*</code> 类型，所以我们分配了 <code>sizeof(Color)</code> 字节的内存空间，来存储每个像素的颜色数据。</p>
 <p>其次<code>fscanf</code>的参数我是根据<code>make imageloader</code>的报错结果修改的，我最开始是认为是<code>3u</code>的就是3位数的unit32，不理解<code>hhu</code>是什么原因。</p>
+<div class="note note-info">
+            <p>注：hhu时unit8的读取</p>
+          </div>
+
 <h3 id="WriteData-Free"><a href="#WriteData-Free" class="headerlink" title="WriteData() &amp; Free()"></a>WriteData() &amp; Free()</h3><p>逻辑上很简单，Free()的话，记得倒着释放，不然会找不到之后的地址。</p>
 <h2 id="Part-A2"><a href="#Part-A2" class="headerlink" title="Part A2"></a>Part A2</h2><p>完成<code>Steganography</code>，完整见<a target="_blank" rel="noopener" href="https://github.com/2333monster/my-cs61c-proj/blob/master/proj1/steganography.c">https://github.com/2333monster/my-cs61c-proj/blob/master/proj1/steganography.c</a></p>
 <p>基于<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%9A%90%E5%86%99%E6%9C%AF">隐写术</a></p>
@@ -341,6 +345,92 @@
 <div class="note note-info">
             <p>完成part A2 时最好自己写测试，而不是使用make steganography命令，至少在我这里，这个命令会导致之前编译成功的<code>makeloader.c</code>的<code>fscanf</code>的参数出现问题。</p><p>另编译时，应该同时编译<code>steganography.c</code>和<code>makeloader.c</code>，因为<code>#include &quot;makeloader.h&quot;</code> 即</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">gcc -o steganography steganography.c makeloader.c<br></code></pre></td></tr></table></figure>
           </div>
+
+<h2 id="Part-B"><a href="#Part-B" class="headerlink" title="Part B"></a>Part B</h2><p>完成 **The Game of Life ** 完整代码见<a target="_blank" rel="noopener" href="https://github.com/2333monster/my-cs61c-proj/blob/master/proj1/gameoflife.c">https://github.com/2333monster/my-cs61c-proj/blob/master/proj1/gameoflife.c</a></p>
+<blockquote>
+<p>规则：</p>
+<ol>
+<li>任何一个周围（8个邻居中）有2或3个活细胞的活细胞，在下一代存活</li>
+<li>任何一个周围有3个或者细胞邻居的死细胞，在下一代存活</li>
+<li>所有其他类型的活细胞下一代带死亡，死细胞下一代仍死亡</li>
+</ol>
+</blockquote>
+<p>规则编码</p>
+<table>
+  <tbody>
+    <tr>
+      <th>If my state is...</th>
+      <th colspan="9"> alive (1)</th>
+      <th colspan="9"> dead (0)</th>
+    </tr>
+    <tr>
+      <th>And the number of alive neighbors is...</th>
+      <td>8</td>
+      <td>7</td>
+      <td>6</td>
+      <td>5</td>
+      <td>4</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>8</td>
+      <td>7</td>
+      <td>6</td>
+      <td>5</td>
+      <td>4</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Then the next state I will be...</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Converting the 18 bits above to a hexadecimal number</th>
+      <td colspan="18"><p align="center">0b00 0001 1000 0000 1000</p>
+        <p align="center">0x1808</p></td>
+      </tr>
+  </tbody>
+</table>
+这也被称为0x1808 rule, 还有其他的[interesting rule](https://en.wikipedia.org/wiki/Life-like_cellular_automaton#A_selection_of_Life-like_rules)，修改hexadecimal number 的值即可(0x0 - 0x3FFFF) 
+
+<h3 id="evaluateOneCell"><a href="#evaluateOneCell" class="headerlink" title="evaluateOneCell()"></a>evaluateOneCell()</h3><div class="note note-info">
+            <p>注意：测试的代码中颜色值只有255或0，255表示alive，0表示dead</p><p>三通道颜色（红，绿，蓝）要分别判断，即分别R,G,B是否存活，依据周围8个细胞的R,G,B状态 </p>
+          </div>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> rx[<span class="hljs-number">8</span>] = &#123;<span class="hljs-number">-1</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>&#125;;<br><span class="hljs-type">int</span> cx[<span class="hljs-number">8</span>] = &#123;<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>&#125;;<br><br>···<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">8</span>;i++)&#123;<br>    <span class="hljs-type">int</span> new_row = ring(row+rx[i],image-&gt;rows);<br>    <span class="hljs-type">int</span> new_col = ring(col+cx[i],image-&gt;cols);<br></code></pre></td></tr></table></figure>
+
+<p>周围8个细胞的位置</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> idR = <span class="hljs-number">9</span>*isaliveR + aliveNeighbourR;<br><span class="hljs-keyword">if</span>(rule &amp; (<span class="hljs-number">1</span>&lt;&lt;idR))&#123;<br>    nextState-&gt;R = <span class="hljs-number">255</span>;<br>&#125;<br><span class="hljs-keyword">else</span>&#123;<br>    nextState-&gt;R = <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>根据规则判断细胞是否存活</p>
+<p>这样设计的原理如下</p>
+<p><code>int idR = 9*isaliveR + aliveNeighbourR</code> :</p>
+<p>首先<code>isaliveR</code>有两种状态0 和 1，<code>9 * isaliveR</code> 是决定状态的位置，注意上面的规则编码表格，每个细胞周围的细胞存活数有9种情况（0~8），使用<code>9 * isaliveR</code> 当<code>isaliveR = 0 </code>时，就处在<code>dead()</code>的范围</p>
+<p>，加上<code>aliveNeighbourR</code>即可确定该细胞的状况，比如死亡周围有5个存活细胞。同理<code>isaliveR = 1</code>。</p>
+<p><code>rule &amp; (1 &lt;&lt; idR)</code></p>
+<p>1左移<code>idR</code>位，<code>idR = 4</code> 则 <code>1 &lt;&lt; 4</code>即 <code>0000 0000 0000 1000</code>，再跟<code>rule</code>取和，<code>0000 0000 0000 1000</code> 与 <code>0001 1000 0000 1000</code> 取和，得<code>0000 0000 0000 1000</code>。显然若结果不为零，则细胞下一代存活</p>
+<h3 id="life-main"><a href="#life-main" class="headerlink" title="life() &amp; main()"></a>life() &amp; main()</h3><p>类似于<code>steganography()</code>的结构</p>
 
                 
               </div>
