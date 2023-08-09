@@ -23,21 +23,21 @@
 <meta property="og:site_name" content="moxilai">
 <meta property="og:description" content="cs61c - Great Ideas in Computer Architecture (Machine Structures) lec 笔记">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://2333monster.github.io/.io//Normalformat.jpg">
-<meta property="og:image" content="https://2333monster.github.io/.io//Overflow.png">
-<meta property="og:image" content="https://2333monster.github.io/.io//FP%20standard.png">
-<meta property="og:image" content="https://2333monster.github.io/.io//biasednotation.png">
-<meta property="og:image" content="https://2333monster.github.io/.io//Denorms.png">
-<meta property="og:image" content="https://2333monster.github.io/.io//Denorms.png">
-<meta property="og:image" content="https://2333monster.github.io/.io//simulator.png">
-<meta property="og:image" content="https://2333monster.github.io/.io//abstraction.png">
-<meta property="og:image" content="https://2333monster.github.io/.io//ISA.png">
+<meta property="og:image" content="https://article.biliimg.com/bfs/article/f3ad228996200f6ee235e4fc0cfcf3023ee79c4b.png@1e_1c.webp">
+<meta property="og:image" content="https://article.biliimg.com/bfs/article/a2edce341ca5abf2f6a0938a32fa4667775d756b.png@1e_1c.webp">
+<meta property="og:image" content="https://article.biliimg.com/bfs/article/27990e7337dcdcb3244f38debb485e65b41b4113.png@1e_1c.webp">
+<meta property="og:image" content="https://article.biliimg.com/bfs/article/05f14009eb079b11db19a7eeb2696ff69aa9e02a.png">
+<meta property="og:image" content="https://article.biliimg.com/bfs/article/e1a1479e5ad2bea60c4769270920b43009135e95.png@1e_1c.webp">
+<meta property="og:image" content="https://article.biliimg.com/bfs/article/718b51238749d751b2ee6393ed9631ae290790da.png">
+<meta property="og:image" content="https://article.biliimg.com/bfs/article/9eed04f3addde054517ed9391d297f38da8c98bc.png@1e_1c.webp">
+<meta property="og:image" content="https://article.biliimg.com/bfs/article/b8cab254ddf3f93b2bd16695a4ebc6d2bf4c3afb.png@1e_1c.webp">
+<meta property="og:image" content="https://article.biliimg.com/bfs/article/365902cbed1e419cb156955e329c3be96e1cbf51.png">
 <meta property="article:published_time" content="2023-08-09T06:43:40.000Z">
-<meta property="article:modified_time" content="2023-08-09T09:46:54.539Z">
+<meta property="article:modified_time" content="2023-08-09T10:22:03.486Z">
 <meta property="article:author" content="John Titor">
 <meta property="article:tag" content="cs61c">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://2333monster.github.io/.io//Normalformat.jpg">
+<meta name="twitter:image" content="https://article.biliimg.com/bfs/article/f3ad228996200f6ee235e4fc0cfcf3023ee79c4b.png@1e_1c.webp">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -287,23 +287,23 @@
                 
                 <h1 id="Lec06-Floating-Point"><a href="#Lec06-Floating-Point" class="headerlink" title="Lec06 Floating Point"></a>Lec06 Floating Point</h1><ul>
 <li><p>规格化</p>
-<img src="/.io//Normalformat.jpg" srcset="/img/loading.gif" lazyload alt="Normalformat" width="60%/">
+<img src="https://article.biliimg.com/bfs/article/f3ad228996200f6ee235e4fc0cfcf3023ee79c4b.png@1e_1c.webp" srcset="/img/loading.gif" lazyload alt="normalformat" style="zoom:67%;" />
 </li>
 <li><p>overflow - underflow</p>
-<img src="/.io//Overflow.png" srcset="/img/loading.gif" lazyload alt="Overflow" style="zoom:67%;">
+<img src="https://article.biliimg.com/bfs/article/a2edce341ca5abf2f6a0938a32fa4667775d756b.png@1e_1c.webp" srcset="/img/loading.gif" lazyload alt="overflow" style="zoom:80%;" />
 </li>
 <li><p>浮点数standard - sign exponent significand </p>
-<img src="/.io//FP standard.png" srcset="/img/loading.gif" lazyload alt="FP standard" style="zoom:60%;">
+<img src="https://article.biliimg.com/bfs/article/27990e7337dcdcb3244f38debb485e65b41b4113.png@1e_1c.webp" srcset="/img/loading.gif" lazyload alt="FP standard" style="zoom:80%;" />
 </li>
 <li><p>IEEE 754 使用 “biased exponent” 表示 + 原因（P&amp;H p136)</p>
-<img src="/.io//biasednotation.png" srcset="/img/loading.gif" lazyload alt="biasednotation" style="zoom:80%;">
+<img src="https://article.biliimg.com/bfs/article/05f14009eb079b11db19a7eeb2696ff69aa9e02a.png" srcset="/img/loading.gif" lazyload alt="biased notation" style="zoom:80%;" />
 </li>
 <li><p>浮点数实际表示值（使用biased notation后）（-1)^S x (1+Significand) x 2^(Exponent-127)</p>
 </li>
 <li><p>FP 表示0；<code>infinity</code>；<code>NaN</code>(Not a Number) (<a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs61c/fa20/pdfs/lectures/lec06.pdf">sild lec06</a> p19-p23)</p>
 </li>
 <li><p>FP 表示<code>Denorms</code>(非规格化数) 重要理解  <a target="_blank" rel="noopener" href="https://youtu.be/Gs0ARZzY-gM?list=PLnvUoC1Ghb7zz9gZ7A6DHo_YI7m_QtTwo&t=456">https://youtu.be/Gs0ARZzY-gM?list=PLnvUoC1Ghb7zz9gZ7A6DHo_YI7m_QtTwo&amp;t=456</a></p>
-<img src="/.io//Denorms.png" srcset="/img/loading.gif" lazyload alt="Denorms">
+<img src="https://article.biliimg.com/bfs/article/e1a1479e5ad2bea60c4769270920b43009135e95.png@1e_1c.webp" srcset="/img/loading.gif" lazyload alt="Denorms" style="zoom:80%;" />
 </li>
 <li><p>表示 1&#x2F;3</p>
 </li>
@@ -312,11 +312,11 @@
 <li><p>FP Precision &amp; Accuracy</p>
 </li>
 <li><p>舍入操作 （P &amp; H 3.5.7)</p>
-<img src="/.io//Denorms.png" srcset="/img/loading.gif" lazyload alt="Denorms">
+<img src="https://article.biliimg.com/bfs/article/718b51238749d751b2ee6393ed9631ae290790da.png" srcset="/img/loading.gif" lazyload alt="round" style="zoom:80%;" />
 </li>
 <li><p>由于浮点数的significand 每次加一后，对整个浮点数其实加1*2^(exponent+127)，所以它会跳过某些数</p>
 <ul>
-<li>因此，无法精确表示且将舍入的第一个整数是：<br>对于<code>float</code>而言，16,777,217（224 + 1）。<br>对于<code>double</code>而言，9,007,199,254,740,993（253 + 1 ）。<img src="/.io//simulator.png" srcset="/img/loading.gif" lazyload alt="simulator"></li>
+<li>因此，无法精确表示且将舍入的第一个整数是：<br>对于<code>float</code>而言，16,777,217（224 + 1）。<br>对于<code>double</code>而言，9,007,199,254,740,993（253 + 1 ）。<img src="https://article.biliimg.com/bfs/article/9eed04f3addde054517ed9391d297f38da8c98bc.png@1e_1c.webp" srcset="/img/loading.gif" lazyload alt="simulator" style="zoom:80%;" /></li>
 </ul>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://www.h-schmidt.net/FloatConverter/IEEE754.html">IEEE 754 simulator</a></p>
@@ -324,10 +324,10 @@
 </ul>
 <h1 id="Lec07-RISC-V-Intro"><a href="#Lec07-RISC-V-Intro" class="headerlink" title="Lec07 RISC-V Intro"></a>Lec07 RISC-V Intro</h1><ul>
 <li><p>Risc-V 抽象层</p>
-<img src="/.io//abstraction.png" srcset="/img/loading.gif" lazyload alt="abstraction">
+<img src="https://article.biliimg.com/bfs/article/b8cab254ddf3f93b2bd16695a4ebc6d2bf4c3afb.png@1e_1c.webp" srcset="/img/loading.gif" lazyload alt="Abstraction" style="zoom:80%;" />
 </li>
 <li><p>Risc-v -&gt; ISA(<em>Instrument Set Architecture</em>)</p>
-<img src="/.io//ISA.png" srcset="/img/loading.gif" lazyload alt="ISA">
+<img src="https://article.biliimg.com/bfs/article/365902cbed1e419cb156955e329c3be96e1cbf51.png" srcset="/img/loading.gif" lazyload alt="ISA" style="zoom:80%;" />
 </li>
 <li><p>寄存器(register)</p>
 </li>
