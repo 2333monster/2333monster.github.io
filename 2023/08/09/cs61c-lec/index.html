@@ -57,8 +57,25 @@
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/fc4.png">
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/jaljalr.png">
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/jjrret-pserdoinstruments.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/symbolicRegisterName.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/sp.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/sp2.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/leaf-unested.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/leaf-assembly.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/stack-saves0s1.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/callerfunc.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/preserv-notpreserv.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/preserv-notpreserv2.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/preservitems.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/stack01.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/func-use-stack.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Memory-allocation.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Memory01.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Memory02.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/heap.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/RV32sofar.png">
 <meta property="article:published_time" content="2023-08-09T06:43:40.000Z">
-<meta property="article:modified_time" content="2023-08-12T09:10:23.007Z">
+<meta property="article:modified_time" content="2023-08-12T12:05:27.686Z">
 <meta property="article:author" content="John Titor">
 <meta property="article:tag" content="cs61c">
 <meta name="twitter:card" content="summary_large_image">
@@ -257,7 +274,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.8k 字
         
       </span>
     
@@ -268,7 +285,7 @@
         
         
         
-          11 分钟
+          16 分钟
         
       </span>
     
@@ -366,6 +383,7 @@
 <li><code>lw</code> Load from Memory to Register (一个字32位)<img src="/2023/08/09/cs61c-lec/lw.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
 <li><code>sw</code> Store from Register to Memory (一个字32位)<img src="/2023/08/09/cs61c-lec/sw.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
 <li>加载存储字节, 加载8位而不是32位，存储到寄存器中时需要<code>sign-extend</code> <img src="/2023/08/09/cs61c-lec/lwbytes.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+
 <img src="/2023/08/09/cs61c-lec/example01.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
 <li>保留addi 的原因<img src="/2023/08/09/cs61c-lec/save_addi.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
 <li>beq; bne; blt; bge</li>
@@ -391,6 +409,58 @@
  <img src="/2023/08/09/cs61c-lec/fc4.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
 <li>jal &amp; jalr <img src="/2023/08/09/cs61c-lec/jaljalr.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
 <li>pseudoinstructions : j, jr &amp; ret  <img src="/2023/08/09/cs61c-lec/jjrret-pserdoinstruments.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
+</ul>
+<h1 id="Lec10-RISC-V-Procedures"><a href="#Lec10-RISC-V-Procedures" class="headerlink" title="Lec10 RISC-V Procedures"></a>Lec10 RISC-V Procedures</h1><p>主要讲stack，嵌套函数调用，寄存器</p>
+<ul>
+<li><p>32 个寄存器的用处，symbolic name</p>
+<img src="/2023/08/09/cs61c-lec/symbolicRegisterName.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+</li>
+<li><p>当需要多余的寄存器时，我们讲旧的冲突的寄存器值存储与stack中</p>
+</li>
+<li><p>sp -&gt; stack pointer，sp自上而下增长 - sp always points to the last used space in the stack</p>
+<img src="/2023/08/09/cs61c-lec/sp.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<img src="/2023/08/09/cs61c-lec/sp2.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+</li>
+<li><p>leaf类型函数调用</p>
+<img src="/2023/08/09/cs61c-lec/leaf-unested.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<p>assembly</p>
+<img src="/2023/08/09/cs61c-lec/leaf-assembly.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<p>保存了s0,s1 的stack</p>
+<img src="/2023/08/09/cs61c-lec/stack-saves0s1.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+</li>
+<li><p>嵌套函数调用，callee(被调用程序) 会破坏 caller(调用程序)的register值，例如所有的函数返回地址(ra)都存储在x1中，callee的ra会与caller的ra冲突；或者是两个函数各自的参数，这些我们都需要存储register值在stack中</p>
+<img src="/2023/08/09/cs61c-lec/callerfunc.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<p>为了避免存储所有的register，造成巨大的负担，caller需要知道那些register的值，一定会被callee恢复，那些register的值不会被callee确保恢复。</p>
+<img src="/2023/08/09/cs61c-lec/preserv-notpreserv.png" srcset="/img/loading.gif" lazyload class="" title="examplename"> 
+<p>&amp;n</p>
+<img src="/2023/08/09/cs61c-lec/preserv-notpreserv2.png" srcset="/img/loading.gif" lazyload class="" title="examplename">  
+<p>&amp;n</p>
+<img src="/2023/08/09/cs61c-lec/preservitems.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+</li>
+<li><p>c中的automatic &amp; static 变量存储</p>
+</li>
+<li><p>对不适合寄存器存储的自动变量(automatic or local variables)使用stack</p>
+</li>
+<li><p><strong>过程帧</strong> <strong>活动变量</strong> - Procedure frame or activation record  stack中存储寄存器和自动变量的部分</p>
+<img src="/2023/08/09/cs61c-lec/stack01.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+</li>
+<li><p>使用stack的例子</p>
+<img src="/2023/08/09/cs61c-lec/func-use-stack.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+</li>
+<li><p>执行程序时，static，stack，heap在memory中</p>
+<img src="/2023/08/09/cs61c-lec/Memory-allocation.png" srcset="/img/loading.gif" lazyload class="png" title="examplename"> 
+
+<p>&amp;n</p>
+<img src="/2023/08/09/cs61c-lec/Memory01.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">   
+
+
+<p>&amp;n</p>
+<img src="/2023/08/09/cs61c-lec/Memory02.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">  
+<p>&amp;n	</p>
+<img src="/2023/08/09/cs61c-lec/heap.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">  
+</li>
+<li><p>Risc-v 32 的 以学指令</p>
+<img src="/2023/08/09/cs61c-lec/RV32sofar.png" srcset="/img/loading.gif" lazyload class="png" title="examplename"></li>
 </ul>
 
                 
