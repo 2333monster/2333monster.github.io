@@ -41,8 +41,24 @@
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/save_addi.png">
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/if-example.png">
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/for-loop.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/logicoperations.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/andi.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/mask.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/leftshift.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/rightshift.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/process.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/programstore.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/programexecution.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/mv.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/pr.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/fc1.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/fc2.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/fc3.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/fc4.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/jaljalr.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/jjrret-pserdoinstruments.png">
 <meta property="article:published_time" content="2023-08-09T06:43:40.000Z">
-<meta property="article:modified_time" content="2023-08-10T10:57:10.673Z">
+<meta property="article:modified_time" content="2023-08-12T09:10:23.007Z">
 <meta property="article:author" content="John Titor">
 <meta property="article:tag" content="cs61c">
 <meta name="twitter:card" content="summary_large_image">
@@ -241,7 +257,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          902 字
+          1.2k 字
         
       </span>
     
@@ -252,7 +268,7 @@
         
         
         
-          8 分钟
+          11 分钟
         
       </span>
     
@@ -356,6 +372,25 @@
 <li>j(jump) label</li>
 <li>if-else 语法<img src="/2023/08/09/cs61c-lec/if-example.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
 <li>for-loop 语法<img src="/2023/08/09/cs61c-lec/for-loop.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
+</ul>
+<h1 id="Lec09-RISC-V-Decisions-II"><a href="#Lec09-RISC-V-Decisions-II" class="headerlink" title="Lec09 RISC-V Decisions II"></a>Lec09 RISC-V Decisions II</h1><ul>
+<li>逻辑运算符<img src="/2023/08/09/cs61c-lec/logicoperations.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
+<li>immediate 版<img src="/2023/08/09/cs61c-lec/andi.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
+<li>掩码（mask）<img src="/2023/08/09/cs61c-lec/mask.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
+<li>使用<code>Xor with 11111111_2</code> 替代 <code>not</code></li>
+<li>逻辑左移 <code>sll &amp; slli</code> <img src="/2023/08/09/cs61c-lec/leftshift.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
+<li>逻辑右移<code>sra &amp; srai</code> <img src="/2023/08/09/cs61c-lec/rightshift.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
+<li>Assembly 编译 <img src="/2023/08/09/cs61c-lec/process.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
+<li>程序存储在memory中，一个指令4个字节 <img src="/2023/08/09/cs61c-lec/programstore.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
+<li>PC(program counter)存储下一条指令的内存地址，从内存中抓取指令，然后<code>control</code>使用<code>Datapath</code>和<code>memory</code>执行，更新PC <img src="/2023/08/09/cs61c-lec/programexecution.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
+<li>pseudoinstructions: mv , li &amp; nop <img src="/2023/08/09/cs61c-lec/mv.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
+<li>function call - jal(j and l) jalr(jr) <img src="/2023/08/09/cs61c-lec/pr.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+ <img src="/2023/08/09/cs61c-lec/fc1.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+ <img src="/2023/08/09/cs61c-lec/fc2.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+ <img src="/2023/08/09/cs61c-lec/fc3.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+ <img src="/2023/08/09/cs61c-lec/fc4.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
+<li>jal &amp; jalr <img src="/2023/08/09/cs61c-lec/jaljalr.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
+<li>pseudoinstructions : j, jr &amp; ret  <img src="/2023/08/09/cs61c-lec/jjrret-pserdoinstruments.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
 </ul>
 
                 
