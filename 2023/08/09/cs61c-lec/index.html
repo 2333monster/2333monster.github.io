@@ -75,7 +75,7 @@
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/heap.png">
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/RV32sofar.png">
 <meta property="article:published_time" content="2023-08-09T06:43:40.000Z">
-<meta property="article:modified_time" content="2023-08-12T12:05:27.686Z">
+<meta property="article:modified_time" content="2023-08-14T12:49:44.999Z">
 <meta property="article:author" content="John Titor">
 <meta property="article:tag" content="cs61c">
 <meta name="twitter:card" content="summary_large_image">
@@ -327,142 +327,108 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Lec06-Floating-Point"><a href="#Lec06-Floating-Point" class="headerlink" title="Lec06 Floating Point"></a>Lec06 Floating Point</h1><ul>
-<li><p>规格化</p>
-<img src="/2023/08/09/cs61c-lec/Normalformat.jpg" srcset="/img/loading.gif" lazyload class="" title="examplename">
-</li>
-<li><p>overflow - underflow</p>
-<img src="/2023/08/09/cs61c-lec/Overflow.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
-</li>
-<li><p>浮点数standard - sign exponent significand </p>
+                <h1 id="Lec06-Floating-Point"><a href="#Lec06-Floating-Point" class="headerlink" title="Lec06 Floating Point"></a>Lec06 Floating Point</h1><h2 id="规格化"><a href="#规格化" class="headerlink" title="规格化"></a>规格化</h2>  <img src="/2023/08/09/cs61c-lec/Normalformat.jpg" srcset="/img/loading.gif" lazyload class="" title="examplename">
 
-</li>
-<li><p>IEEE 754 使用 “biased exponent” 表示 + 原因（P&amp;H p136)</p>
-<img src="/2023/08/09/cs61c-lec/biasednotation.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
-</li>
-<li><p>浮点数实际表示值（使用biased notation后）（-1)^S x (1+Significand) x 2^(Exponent-127)</p>
-</li>
-<li><p>FP 表示0；<code>infinity</code>；<code>NaN</code>(Not a Number) (<a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs61c/fa20/pdfs/lectures/lec06.pdf">sild lec06</a> p19-p23)</p>
-</li>
-<li><p>FP 表示<code>Denorms</code>(非规格化数) 重要理解  <a target="_blank" rel="noopener" href="https://youtu.be/Gs0ARZzY-gM?list=PLnvUoC1Ghb7zz9gZ7A6DHo_YI7m_QtTwo&t=456">https://youtu.be/Gs0ARZzY-gM?list=PLnvUoC1Ghb7zz9gZ7A6DHo_YI7m_QtTwo&amp;t=456</a></p>
-<img src="/2023/08/09/cs61c-lec/Denorms.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
-</li>
-<li><p>表示 1&#x2F;3</p>
-</li>
-<li><p>FP 加法不可交换</p>
-</li>
-<li><p>FP Precision &amp; Accuracy</p>
-</li>
-<li><p>舍入操作 （P &amp; H 3.5.7)</p>
-<img src="/2023/08/09/cs61c-lec/round.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
-</li>
-<li><p>由于浮点数的significand 每次加一后，对整个浮点数其实加1*2^(exponent+127)，所以它会跳过某些数</p>
-<ul>
-<li>因此，无法精确表示且将舍入的第一个整数是：<br>对于<code>float</code>而言，16,777,217（224 + 1）。<br>对于<code>double</code>而言，9,007,199,254,740,993（253 + 1 ）。<img src="/2023/08/09/cs61c-lec/simulator.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
+<h2 id="overflow-underflow"><a href="#overflow-underflow" class="headerlink" title="overflow - underflow"></a>overflow - underflow</h2>  <img src="/2023/08/09/cs61c-lec/Overflow.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+
+<h2 id="浮点数standard-sign-exponent-significand"><a href="#浮点数standard-sign-exponent-significand" class="headerlink" title="浮点数standard - sign exponent significand"></a>浮点数standard - sign exponent significand</h2>  
+
+<h2 id="IEEE-754-使用-“biased-exponent”-表示-原因（P-H-p136"><a href="#IEEE-754-使用-“biased-exponent”-表示-原因（P-H-p136" class="headerlink" title="IEEE 754 使用 “biased exponent” 表示 + 原因（P&amp;H p136)"></a>IEEE 754 使用 “biased exponent” 表示 + 原因（P&amp;H p136)</h2>  <img src="/2023/08/09/cs61c-lec/biasednotation.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+
+<h2 id="浮点数实际表示值（使用biased-notation后）"><a href="#浮点数实际表示值（使用biased-notation后）" class="headerlink" title="浮点数实际表示值（使用biased notation后）"></a>浮点数实际表示值（使用biased notation后）</h2><p>（-1)^S x (1+Significand) x 2^(Exponent-127)</p>
+<h2 id="FP-表示0；infinity；NaN-Not-a-Number"><a href="#FP-表示0；infinity；NaN-Not-a-Number" class="headerlink" title="FP 表示0；infinity；NaN(Not a Number)"></a>FP 表示0；<code>infinity</code>；<code>NaN</code>(Not a Number)</h2><ul>
+<li>(<a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs61c/fa20/pdfs/lectures/lec06.pdf">sild lec06</a> p19-p23)</li>
 </ul>
+<h2 id="FP-表示Denorms-非规格化数-重要理解"><a href="#FP-表示Denorms-非规格化数-重要理解" class="headerlink" title="FP 表示Denorms(非规格化数) 重要理解"></a>FP 表示<code>Denorms</code>(非规格化数) 重要理解</h2><p><a target="_blank" rel="noopener" href="https://youtu.be/Gs0ARZzY-gM?list=PLnvUoC1Ghb7zz9gZ7A6DHo_YI7m_QtTwo&t=456">https://youtu.be/Gs0ARZzY-gM?list=PLnvUoC1Ghb7zz9gZ7A6DHo_YI7m_QtTwo&amp;t=456</a><br>  <img src="/2023/08/09/cs61c-lec/Denorms.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></p>
+<ul>
+<li>表示 1&#x2F;3</li>
+<li>FP 加法不可交换</li>
+<li>FP Precision &amp; Accuracy</li>
+</ul>
+<h2 id="舍入操作-（P-H-3-5-7"><a href="#舍入操作-（P-H-3-5-7" class="headerlink" title="舍入操作 （P &amp; H 3.5.7)"></a>舍入操作 （P &amp; H 3.5.7)</h2>  <img src="/2023/08/09/cs61c-lec/round.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+
+<h2 id="由于浮点数的significand-每次加一后，对整个浮点数其实加1-2-exponent-127-，所以它会跳过某些数"><a href="#由于浮点数的significand-每次加一后，对整个浮点数其实加1-2-exponent-127-，所以它会跳过某些数" class="headerlink" title="由于浮点数的significand 每次加一后，对整个浮点数其实加1*2^(exponent+127)，所以它会跳过某些数"></a>由于浮点数的significand 每次加一后，对整个浮点数其实加1*2^(exponent+127)，所以它会跳过某些数</h2><ul>
+<li><p>因此，无法精确表示且将舍入的第一个整数是：<br>对于<code>float</code>而言，16,777,217（224 + 1）。<br>对于<code>double</code>而言，9,007,199,254,740,993（253 + 1 ）。</p>
+<img src="/2023/08/09/cs61c-lec/simulator.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://www.h-schmidt.net/FloatConverter/IEEE754.html">IEEE 754 simulator</a></p>
 </li>
 </ul>
-<h1 id="Lec07-RISC-V-Intro"><a href="#Lec07-RISC-V-Intro" class="headerlink" title="Lec07 RISC-V Intro"></a>Lec07 RISC-V Intro</h1><ul>
-<li><p>Risc-V 抽象层</p>
-<img src="/2023/08/09/cs61c-lec/abstraction.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
-</li>
-<li><p>Risc-v -&gt; ISA(<em>Instrument Set Architecture</em>)</p>
-<img src="/2023/08/09/cs61c-lec/assembly.png" srcset="/img/loading.gif" lazyload class="FP" title="examplename">
-</li>
+<h1 id="Lec07-RISC-V-Intro"><a href="#Lec07-RISC-V-Intro" class="headerlink" title="Lec07 RISC-V Intro"></a>Lec07 RISC-V Intro</h1><h2 id="Risc-V-抽象层"><a href="#Risc-V-抽象层" class="headerlink" title="Risc-V 抽象层"></a>Risc-V 抽象层</h2>  <img src="/2023/08/09/cs61c-lec/abstraction.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+
+<h2 id="Risc-v-ISA-Instrument-Set-Architecture"><a href="#Risc-v-ISA-Instrument-Set-Architecture" class="headerlink" title="Risc-v -&gt; ISA(Instrument Set Architecture)"></a>Risc-v -&gt; ISA(<em>Instrument Set Architecture</em>)</h2>  <img src="/2023/08/09/cs61c-lec/assembly.png" srcset="/img/loading.gif" lazyload class="FP" title="examplename">
+
+<ul>
 <li><p>寄存器(register)</p>
 </li>
 <li><p>基础操作符 - add sub addi</p>
 </li>
 </ul>
-<h1 id="Lec08-RISC-V-lw-sw-Decisions-I"><a href="#Lec08-RISC-V-lw-sw-Decisions-I" class="headerlink" title="Lec08 RISC-V lw, sw, Decisions I"></a>Lec08 RISC-V lw, sw, Decisions I</h1><ul>
-<li>字节<br>1个字32个位，即4个字节；一个字节8个位。<img src="/2023/08/09/cs61c-lec/Address.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li>小尾数法(Little Endian) 内存存储字节<img src="/2023/08/09/cs61c-lec/littleendian.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li>从寄存器访问比从内存访问快<img src="/2023/08/09/cs61c-lec/register-memory.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li><code>lw</code> Load from Memory to Register (一个字32位)<img src="/2023/08/09/cs61c-lec/lw.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li><code>sw</code> Store from Register to Memory (一个字32位)<img src="/2023/08/09/cs61c-lec/sw.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li>加载存储字节, 加载8位而不是32位，存储到寄存器中时需要<code>sign-extend</code> <img src="/2023/08/09/cs61c-lec/lwbytes.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h1 id="Lec08-RISC-V-lw-sw-Decisions-I"><a href="#Lec08-RISC-V-lw-sw-Decisions-I" class="headerlink" title="Lec08 RISC-V lw, sw, Decisions I"></a>Lec08 RISC-V lw, sw, Decisions I</h1><h2 id="字节"><a href="#字节" class="headerlink" title="字节"></a>字节</h2><p>  1个字32个位，即4个字节；一个字节8个位。<br>  <img src="/2023/08/09/cs61c-lec/Address.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></p>
+<h2 id="小尾数法-Little-Endian-内存存储字节"><a href="#小尾数法-Little-Endian-内存存储字节" class="headerlink" title="小尾数法(Little Endian) 内存存储字节"></a>小尾数法(Little Endian) 内存存储字节</h2>  <img src="/2023/08/09/cs61c-lec/littleendian.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="从寄存器访问比从内存访问快"><a href="#从寄存器访问比从内存访问快" class="headerlink" title="从寄存器访问比从内存访问快"></a>从寄存器访问比从内存访问快</h2>  <img src="/2023/08/09/cs61c-lec/register-memory.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="lw-Load-from-Memory-to-Register-一个字32位"><a href="#lw-Load-from-Memory-to-Register-一个字32位" class="headerlink" title="lw Load from Memory to Register (一个字32位)"></a><code>lw</code> Load from Memory to Register (一个字32位)</h2>  <img src="/2023/08/09/cs61c-lec/lw.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="sw-Store-from-Register-to-Memory-一个字32位"><a href="#sw-Store-from-Register-to-Memory-一个字32位" class="headerlink" title="sw Store from Register to Memory (一个字32位)"></a><code>sw</code> Store from Register to Memory (一个字32位)</h2>  <img src="/2023/08/09/cs61c-lec/sw.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="加载存储字节-加载8位而不是32位，存储到寄存器中时需要sign-extend"><a href="#加载存储字节-加载8位而不是32位，存储到寄存器中时需要sign-extend" class="headerlink" title="加载存储字节, 加载8位而不是32位，存储到寄存器中时需要sign-extend"></a>加载存储字节, 加载8位而不是32位，存储到寄存器中时需要<code>sign-extend</code></h2>  <img src="/2023/08/09/cs61c-lec/lwbytes.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
 
-<img src="/2023/08/09/cs61c-lec/example01.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li>保留addi 的原因<img src="/2023/08/09/cs61c-lec/save_addi.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
+  <img src="/2023/08/09/cs61c-lec/example01.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="保留addi-的原因"><a href="#保留addi-的原因" class="headerlink" title="保留addi 的原因"></a>保留addi 的原因</h2>  <img src="/2023/08/09/cs61c-lec/save_addi.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<ul>
 <li>beq; bne; blt; bge</li>
 <li>j(jump) label</li>
-<li>if-else 语法<img src="/2023/08/09/cs61c-lec/if-example.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li>for-loop 语法<img src="/2023/08/09/cs61c-lec/for-loop.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
 </ul>
-<h1 id="Lec09-RISC-V-Decisions-II"><a href="#Lec09-RISC-V-Decisions-II" class="headerlink" title="Lec09 RISC-V Decisions II"></a>Lec09 RISC-V Decisions II</h1><ul>
-<li>逻辑运算符<img src="/2023/08/09/cs61c-lec/logicoperations.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li>immediate 版<img src="/2023/08/09/cs61c-lec/andi.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li>掩码（mask）<img src="/2023/08/09/cs61c-lec/mask.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li>使用<code>Xor with 11111111_2</code> 替代 <code>not</code></li>
-<li>逻辑左移 <code>sll &amp; slli</code> <img src="/2023/08/09/cs61c-lec/leftshift.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li>逻辑右移<code>sra &amp; srai</code> <img src="/2023/08/09/cs61c-lec/rightshift.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li>Assembly 编译 <img src="/2023/08/09/cs61c-lec/process.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li>程序存储在memory中，一个指令4个字节 <img src="/2023/08/09/cs61c-lec/programstore.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li>PC(program counter)存储下一条指令的内存地址，从内存中抓取指令，然后<code>control</code>使用<code>Datapath</code>和<code>memory</code>执行，更新PC <img src="/2023/08/09/cs61c-lec/programexecution.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li>pseudoinstructions: mv , li &amp; nop <img src="/2023/08/09/cs61c-lec/mv.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li>function call - jal(j and l) jalr(jr) <img src="/2023/08/09/cs61c-lec/pr.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
- <img src="/2023/08/09/cs61c-lec/fc1.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
- <img src="/2023/08/09/cs61c-lec/fc2.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
- <img src="/2023/08/09/cs61c-lec/fc3.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
- <img src="/2023/08/09/cs61c-lec/fc4.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li>jal &amp; jalr <img src="/2023/08/09/cs61c-lec/jaljalr.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-<li>pseudoinstructions : j, jr &amp; ret  <img src="/2023/08/09/cs61c-lec/jjrret-pserdoinstruments.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></li>
-</ul>
+<h2 id="if-else-语法"><a href="#if-else-语法" class="headerlink" title="if-else 语法"></a>if-else 语法</h2>  <img src="/2023/08/09/cs61c-lec/if-example.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="for-loop-语法"><a href="#for-loop-语法" class="headerlink" title="for-loop 语法"></a>for-loop 语法</h2>  <img src="/2023/08/09/cs61c-lec/for-loop.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+
+
+
+<h1 id="Lec09-RISC-V-Decisions-II"><a href="#Lec09-RISC-V-Decisions-II" class="headerlink" title="Lec09 RISC-V Decisions II"></a>Lec09 RISC-V Decisions II</h1><h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2>  <img src="/2023/08/09/cs61c-lec/logicoperations.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="immediate-版"><a href="#immediate-版" class="headerlink" title="immediate 版"></a>immediate 版</h2>  <img src="/2023/08/09/cs61c-lec/andi.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="掩码（mask）"><a href="#掩码（mask）" class="headerlink" title="掩码（mask）"></a>掩码（mask）</h2>  <img src="/2023/08/09/cs61c-lec/mask.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="使用Xor-with-11111111-2-替代-not"><a href="#使用Xor-with-11111111-2-替代-not" class="headerlink" title="使用Xor with 11111111_2 替代 not"></a>使用<code>Xor with 11111111_2</code> 替代 <code>not</code></h2><h2 id="逻辑左移-sll-slli"><a href="#逻辑左移-sll-slli" class="headerlink" title="逻辑左移 sll &amp; slli"></a>逻辑左移 <code>sll &amp; slli</code></h2>   <img src="/2023/08/09/cs61c-lec/leftshift.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="逻辑右移sra-srai"><a href="#逻辑右移sra-srai" class="headerlink" title="逻辑右移sra &amp; srai"></a>逻辑右移<code>sra &amp; srai</code></h2>   <img src="/2023/08/09/cs61c-lec/rightshift.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="Assembly-编译"><a href="#Assembly-编译" class="headerlink" title="Assembly 编译"></a>Assembly 编译</h2>   <img src="/2023/08/09/cs61c-lec/process.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="程序存储在memory中，一个指令4个字节"><a href="#程序存储在memory中，一个指令4个字节" class="headerlink" title="程序存储在memory中，一个指令4个字节"></a>程序存储在memory中，一个指令4个字节</h2>   <img src="/2023/08/09/cs61c-lec/programstore.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="PC-program-counter-存储下一条指令的内存地址，从内存中抓取指令，然后control使用Datapath和memory执行，更新PC"><a href="#PC-program-counter-存储下一条指令的内存地址，从内存中抓取指令，然后control使用Datapath和memory执行，更新PC" class="headerlink" title="PC(program counter)存储下一条指令的内存地址，从内存中抓取指令，然后control使用Datapath和memory执行，更新PC"></a>PC(program counter)存储下一条指令的内存地址，从内存中抓取指令，然后<code>control</code>使用<code>Datapath</code>和<code>memory</code>执行，更新PC</h2>   <img src="/2023/08/09/cs61c-lec/programexecution.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="pseudoinstructions-mv-li-nop"><a href="#pseudoinstructions-mv-li-nop" class="headerlink" title="pseudoinstructions: mv , li &amp; nop"></a>pseudoinstructions: mv , li &amp; nop</h2>   <img src="/2023/08/09/cs61c-lec/mv.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="function-call-jal-j-and-l-jalr-jr"><a href="#function-call-jal-j-and-l-jalr-jr" class="headerlink" title="function call - jal(j and l) jalr(jr)"></a>function call - jal(j and l) jalr(jr)</h2>   <img src="/2023/08/09/cs61c-lec/pr.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+
+   <img src="/2023/08/09/cs61c-lec/fc1.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+
+   <img src="/2023/08/09/cs61c-lec/fc2.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+
+   <img src="/2023/08/09/cs61c-lec/fc3.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+
+   <img src="/2023/08/09/cs61c-lec/fc4.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="jal-jalr"><a href="#jal-jalr" class="headerlink" title="jal &amp; jalr"></a>jal &amp; jalr</h2>   <img src="/2023/08/09/cs61c-lec/jaljalr.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="pseudoinstructions-j-jr-ret"><a href="#pseudoinstructions-j-jr-ret" class="headerlink" title="pseudoinstructions : j, jr &amp; ret"></a>pseudoinstructions : j, jr &amp; ret</h2>   <img src="/2023/08/09/cs61c-lec/jjrret-pserdoinstruments.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+
 <h1 id="Lec10-RISC-V-Procedures"><a href="#Lec10-RISC-V-Procedures" class="headerlink" title="Lec10 RISC-V Procedures"></a>Lec10 RISC-V Procedures</h1><p>主要讲stack，嵌套函数调用，寄存器</p>
+<h2 id="32-个寄存器的用处，symbolic-name"><a href="#32-个寄存器的用处，symbolic-name" class="headerlink" title="32 个寄存器的用处，symbolic name"></a>32 个寄存器的用处，symbolic name</h2>  <img src="/2023/08/09/cs61c-lec/symbolicRegisterName.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+
+<h2 id="当需要多余的寄存器时，我们讲旧的冲突的寄存器值存储与stack中"><a href="#当需要多余的寄存器时，我们讲旧的冲突的寄存器值存储与stack中" class="headerlink" title="当需要多余的寄存器时，我们讲旧的冲突的寄存器值存储与stack中"></a>当需要多余的寄存器时，我们讲旧的冲突的寄存器值存储与stack中</h2><h2 id="sp-stack-pointer，sp自上而下增长-sp-always-points-to-the-last-used-space-in-the-stack"><a href="#sp-stack-pointer，sp自上而下增长-sp-always-points-to-the-last-used-space-in-the-stack" class="headerlink" title="sp -&gt; stack pointer，sp自上而下增长 - sp always points to the last used space in the stack"></a>sp -&gt; stack pointer，sp自上而下增长 - sp always points to the last used space in the stack</h2>  <img src="/2023/08/09/cs61c-lec/sp.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+  <img src="/2023/08/09/cs61c-lec/sp2.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+
+<h2 id="leaf类型函数调用"><a href="#leaf类型函数调用" class="headerlink" title="leaf类型函数调用"></a>leaf类型函数调用</h2>  <img src="/2023/08/09/cs61c-lec/leaf-unested.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<p>  assembly<br>  <img src="/2023/08/09/cs61c-lec/leaf-assembly.png" srcset="/img/loading.gif" lazyload class="" title="examplename"><br>  保存了s0,s1 的stack<br>  <img src="/2023/08/09/cs61c-lec/stack-saves0s1.png" srcset="/img/loading.gif" lazyload class="" title="examplename"></p>
+<h2 id="嵌套函数调用，"><a href="#嵌套函数调用，" class="headerlink" title="嵌套函数调用，"></a>嵌套函数调用，</h2><p>callee(被调用程序) 会破坏 caller(调用程序)的register值，例如所有的函数返回地址(ra)都存储在x1中，callee的ra会与caller的ra冲突；或者是两个函数各自的参数，这些我们都需要存储register值在stack中<br>  <img src="/2023/08/09/cs61c-lec/callerfunc.png" srcset="/img/loading.gif" lazyload class="" title="examplename"><br>  为了避免存储所有的register，造成巨大的负担，caller需要知道那些register的值，一定会被callee恢复，那些register的值不会被callee确保恢复。<br>  <img src="/2023/08/09/cs61c-lec/preserv-notpreserv.png" srcset="/img/loading.gif" lazyload class="" title="examplename"><br>  &amp;n</p>
+  <img src="/2023/08/09/cs61c-lec/preserv-notpreserv2.png" srcset="/img/loading.gif" lazyload class="" title="examplename">  
+<p>  &amp;n</p>
+  <img src="/2023/08/09/cs61c-lec/preservitems.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+
 <ul>
-<li><p>32 个寄存器的用处，symbolic name</p>
-<img src="/2023/08/09/cs61c-lec/symbolicRegisterName.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
-</li>
-<li><p>当需要多余的寄存器时，我们讲旧的冲突的寄存器值存储与stack中</p>
-</li>
-<li><p>sp -&gt; stack pointer，sp自上而下增长 - sp always points to the last used space in the stack</p>
-<img src="/2023/08/09/cs61c-lec/sp.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
-<img src="/2023/08/09/cs61c-lec/sp2.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
-</li>
-<li><p>leaf类型函数调用</p>
-<img src="/2023/08/09/cs61c-lec/leaf-unested.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
-<p>assembly</p>
-<img src="/2023/08/09/cs61c-lec/leaf-assembly.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
-<p>保存了s0,s1 的stack</p>
-<img src="/2023/08/09/cs61c-lec/stack-saves0s1.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
-</li>
-<li><p>嵌套函数调用，callee(被调用程序) 会破坏 caller(调用程序)的register值，例如所有的函数返回地址(ra)都存储在x1中，callee的ra会与caller的ra冲突；或者是两个函数各自的参数，这些我们都需要存储register值在stack中</p>
-<img src="/2023/08/09/cs61c-lec/callerfunc.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
-<p>为了避免存储所有的register，造成巨大的负担，caller需要知道那些register的值，一定会被callee恢复，那些register的值不会被callee确保恢复。</p>
-<img src="/2023/08/09/cs61c-lec/preserv-notpreserv.png" srcset="/img/loading.gif" lazyload class="" title="examplename"> 
-<p>&amp;n</p>
-<img src="/2023/08/09/cs61c-lec/preserv-notpreserv2.png" srcset="/img/loading.gif" lazyload class="" title="examplename">  
-<p>&amp;n</p>
-<img src="/2023/08/09/cs61c-lec/preservitems.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
-</li>
 <li><p>c中的automatic &amp; static 变量存储</p>
 </li>
 <li><p>对不适合寄存器存储的自动变量(automatic or local variables)使用stack</p>
 </li>
-<li><p><strong>过程帧</strong> <strong>活动变量</strong> - Procedure frame or activation record  stack中存储寄存器和自动变量的部分</p>
-<img src="/2023/08/09/cs61c-lec/stack01.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
-</li>
-<li><p>使用stack的例子</p>
-<img src="/2023/08/09/cs61c-lec/func-use-stack.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
-</li>
-<li><p>执行程序时，static，stack，heap在memory中</p>
-<img src="/2023/08/09/cs61c-lec/Memory-allocation.png" srcset="/img/loading.gif" lazyload class="png" title="examplename"> 
-
-<p>&amp;n</p>
-<img src="/2023/08/09/cs61c-lec/Memory01.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">   
-
-
-<p>&amp;n</p>
-<img src="/2023/08/09/cs61c-lec/Memory02.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">  
-<p>&amp;n	</p>
-<img src="/2023/08/09/cs61c-lec/heap.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">  
-</li>
-<li><p>Risc-v 32 的 以学指令</p>
-<img src="/2023/08/09/cs61c-lec/RV32sofar.png" srcset="/img/loading.gif" lazyload class="png" title="examplename"></li>
 </ul>
+<h2 id="过程帧-活动变量-Procedure-frame-or-activation-record-stack中存储寄存器和自动变量的部分"><a href="#过程帧-活动变量-Procedure-frame-or-activation-record-stack中存储寄存器和自动变量的部分" class="headerlink" title="过程帧 活动变量 - Procedure frame or activation record  stack中存储寄存器和自动变量的部分"></a><strong>过程帧</strong> <strong>活动变量</strong> - Procedure frame or activation record  stack中存储寄存器和自动变量的部分</h2>  <img src="/2023/08/09/cs61c-lec/stack01.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
 
+<h2 id="使用stack的例子"><a href="#使用stack的例子" class="headerlink" title="使用stack的例子"></a>使用stack的例子</h2>  <img src="/2023/08/09/cs61c-lec/func-use-stack.png" srcset="/img/loading.gif" lazyload class="" title="examplename">
+<h2 id="执行程序时，static，stack，heap在memory中"><a href="#执行程序时，static，stack，heap在memory中" class="headerlink" title="执行程序时，static，stack，heap在memory中"></a>执行程序时，static，stack，heap在memory中</h2>  <img src="/2023/08/09/cs61c-lec/Memory-allocation.png" srcset="/img/loading.gif" lazyload class="png" title="examplename"> 
+<p>  &amp;n<br>  <img src="/2023/08/09/cs61c-lec/Memory01.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">   </p>
+<p>  &amp;n<br>  <img src="/2023/08/09/cs61c-lec/Memory02.png" srcset="/img/loading.gif" lazyload class="png" title="examplename"><br>  &amp;n	<br>  <img src="/2023/08/09/cs61c-lec/heap.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">  </p>
+<h2 id="Risc-v-32-的-以学指令"><a href="#Risc-v-32-的-以学指令" class="headerlink" title="Risc-v 32 的 以学指令"></a>Risc-v 32 的 以学指令</h2>  <img src="/2023/08/09/cs61c-lec/RV32sofar.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
                 
               </div>
             

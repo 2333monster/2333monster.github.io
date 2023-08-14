@@ -1,0 +1,783 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Titor">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="cs61c - Great Ideas in Computer Architecture (Machine Structures) proj2 笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs61c-proj2">
+<meta property="og:url" content="https://2333monster.github.io/2023/08/12/cs61c-proj2/index.html">
+<meta property="og:site_name" content="moxilai">
+<meta property="og:description" content="cs61c - Great Ideas in Computer Architecture (Machine Structures) proj2 笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-12T12:58:06.000Z">
+<meta property="article:modified_time" content="2023-08-14T12:44:32.716Z">
+<meta property="article:author" content="John Titor">
+<meta property="article:tag" content="cs61c">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>cs61c-proj2 - moxilai</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"2333monster.github.io","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>moxilai</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="cs61c-proj2"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-12 20:58" pubdate>
+          2023年8月12日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          36 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">cs61c-proj2</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Project-2-CS61Classify"><a href="#Project-2-CS61Classify" class="headerlink" title="Project 2: CS61Classify"></a>Project 2: CS61Classify</h1><blockquote>
+<p>cs61c - Great Ideas in Computer Architecture (Machine Structures) proj2 笔记</p>
+<p>课程主页：<a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs61c/fa20/#by-week">https://inst.eecs.berkeley.edu/~cs61c/fa20/#by-week</a></p>
+<p>个人仓库：<a target="_blank" rel="noopener" href="https://github.com/2333monster/my-cs61c-proj">https://github.com/2333monster/my-cs61c-proj</a></p>
+<p>注：是sp22 的proj2</p>
+</blockquote>
+<h2 id="Part-A-Math-Functions"><a href="#Part-A-Math-Functions" class="headerlink" title="Part A: Math Functions"></a>Part A: Math Functions</h2><p> 完成</p>
+<ul>
+<li>abs</li>
+<li>dot product</li>
+<li>matrix multiplication</li>
+<li>an element-wise rectifier function (ReLU)</li>
+<li>an argmax function for vectors.</li>
+</ul>
+<h3 id="Task-1-Absolute-Value-Walkthrough"><a href="#Task-1-Absolute-Value-Walkthrough" class="headerlink" title="Task 1: Absolute Value (Walkthrough)"></a>Task 1: Absolute Value (Walkthrough)</h3><p>熟悉工作流</p>
+<h4 id="Running-Tests"><a href="#Running-Tests" class="headerlink" title="Running Tests"></a>Running Tests</h4><p>在linux 环境下，进行操作即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">bash test.sh<br>bash test.sh part_a <br>bash test.sh test_abs<br></code></pre></td></tr></table></figure>
+
+<h4 id="Using-VDB-to-debug-tests-via-Venus"><a href="#Using-VDB-to-debug-tests-via-Venus" class="headerlink" title="Using VDB to debug tests via Venus"></a>Using VDB to debug tests via Venus</h4><p>根据<a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs61c/sp22/projects/proj2/#setup-venus">the setup section of the spec</a> 设置venus，注意在linux 下即可</p>
+<p>在&#x2F;src&#x2F;abs.s 中添加ebreak</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs assembly">abs:<br>	# Prologue<br>    ebreak<br>	# PASTE HERE<br><br>    blt a0, zero, done<br><br>    # Negate a0<br>    sub a0, x0, a0<br><br>	done:<br>	  ret<br>	# Epilogue<br></code></pre></td></tr></table></figure>
+
+<p>在terminal 中，运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd /vmfs/test-src<br>vdb test_abs_one.s <br></code></pre></td></tr></table></figure>
+
+<p>然后再simulator 中debug就好，发现错误后（大于0但是取了相反数），修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs assembly">abs:<br>	# Prologue<br>    ebreak<br>	# PASTE HERE<br><br>    bge a0, zero, done<br><br>    # Negate a0<br>    sub a0, x0, a0<br><br>	done:<br>	  ret<br>	# Epilogue<br></code></pre></td></tr></table></figure>
+
+<h3 id="Task-2-ReLU"><a href="#Task-2-ReLU" class="headerlink" title="Task 2: ReLU"></a>Task 2: ReLU</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs assembly">relu:<br>    # ebreak<br>	# Prologue<br>    li t5,1<br>    blt a1,t5,exit_relu<br>    add t0, x0,x0<br>    addi t2, x0, 4<br>loop_start:<br>	beq t0, a1, loop_end<br>	mul t1, t0, t2<br>    add t3, a0, t1<br>    lw t4, 0(t3)<br>	bgt t4, x0, loop_continue<br>	sw zero, 0(t3)<br>loop_continue:<br>	addi t0, t0, 1<br>	j loop_start<br>loop_end:<br>	# Epilogue<br>	ret<br>exit_relu:<br>    li a0 36<br>    j exit<br></code></pre></td></tr></table></figure>
+
+<h3 id="Task-3-Argmax"><a href="#Task-3-Argmax" class="headerlink" title="Task 3: Argmax"></a>Task 3: Argmax</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs assembly">argmax:<br>    ebreak<br>    # Prologue<br>    li t5, 1<br>    blt a1, t5, exit_argmax<br>    li t0,0         #max_index<br>    lw t1,0(a0)     #max_value<br>    add t2,x0,x0    #i<br>    li t5,4<br>loop_start:<br>    beq t2,a1,loop_end<br>    mul t4,t2,t5    #4i<br>    add t6,a0,t4    #&amp;a0[i]<br>    lw t3,0(t6)     #a0[i]<br>    bge t1,t3,loop_continue<br>    mv t1,t3<br>    mv t0,t2<br>loop_continue:<br>    addi t2,t2,1<br>    j loop_start<br>exit_argmax:<br>    li a0,36<br>    j exit<br>loop_end:<br>    mv a0,t0<br>    ret<br></code></pre></td></tr></table></figure>
+
+<h3 id="Task-4-Dot-Product"><a href="#Task-4-Dot-Product" class="headerlink" title="Task 4: Dot Product"></a>Task 4: Dot Product</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs assembly">dot:<br>	ebreak<br>	# Prologue<br>	li t5,1<br>	blt a2,t5,exit_36<br>	blt a3,t5,exit_37<br>	blt a4,t5,exit_37<br>	li t0,0 		#result<br>	li t1,0 		#i<br>	slli a3,a3,2		<br>	slli a4,a4,2<br>loop_start:<br>	beq t1,a2,loop_end<br>	lw t2,0(a0)<br>	lw t3,0(a1)<br><br>	mul t4,t2,t3<br>	add t0,t0,t4<br><br>	add a0,a0,a3<br>	add a1,a1,a4<br>	addi t1,t1,1<br>	j loop_start<br>exit_36:<br>	li a0 36<br>	j exit<br>exit_37:<br>	li a0 37<br>	j exit<br>loop_end:<br>	# Epilogue<br>	mv a0 t0<br>	ret<br></code></pre></td></tr></table></figure>
+
+<h3 id="Task5-Matrix-Multiplication"><a href="#Task5-Matrix-Multiplication" class="headerlink" title="Task5: Matrix Multiplication"></a>Task5: Matrix Multiplication</h3><p>做了好久，刚开始写确实很乱，静下心梳理。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><code class="hljs assembly">matmul:<br>	ebreak<br>	# Error checks<br>	li t5, 1<br>	blt a1, t5, exit_38<br>	blt a2, t5, exit_38<br>	blt a4, t5, exit_38<br>	blt a5, t5, exit_38<br>	bne a2, a4, exit_38<br><br>	# Prologue<br>	addi sp, sp, -16<br>	sw s0, 0(sp)<br>	sw s1, 4(sp)<br>	sw s2, 8(sp)<br>	sw s3, 12(sp)<br>	li s0, 0     # i<br>	li s1, 0     # j<br><br>outer_loop_start:<br>	li s1, 0<br><br>inner_loop_start:<br>	# save context<br>	addi sp, sp, -32<br>	sw ra, 0(sp)<br>	sw a0, 4(sp)<br>	sw a1, 8(sp)<br>	sw a2, 12(sp)<br>	sw a3, 16(sp)<br>	sw a4, 20(sp)<br>	sw a5, 24(sp)<br>	sw a6, 28(sp)<br><br>	# set arguments for dot function<br>	addi t4, x0, 4<br>	mul t4, t4, s1<br>	add a1, a3, t4<br>	li a3, 1<br>	mv a4, a5<br><br>	# call dot function<br>	jal dot<br><br>	# get answer<br>	mv t1, a0<br><br>	# restore context<br>	lw ra, 0(sp)<br>	lw a0, 4(sp)<br>	lw a1, 8(sp)<br>	lw a2, 12(sp)<br>	lw a3, 16(sp)<br>	lw a4, 20(sp)<br>	lw a5, 24(sp)<br>	lw a6, 28(sp)<br>	addi sp, sp, 32<br><br>	# store result in the result matrix d<br>	mul t2, s0, a5<br>	add t2, t2, s1<br>	addi t4, x0, 4<br>	mul t2, t2, t4<br>	add t2, a6, t2<br>	sw t1, 0(t2)<br><br>inner_loop_end:<br>	addi s1, s1, 1<br>	beq s1, a5, outer_loop_end<br>	j inner_loop_start<br><br>outer_loop_end:<br>	addi s0, s0, 1<br>	addi t4, x0, 4<br>	mul t0, t4, a2<br>	add a0, a0, t0<br>	beq s0, a1, end<br>	j outer_loop_start<br><br><br>end:<br>	# Epilogue<br>	lw s0, 0(sp)<br>	lw s1, 4(sp)<br>	lw s2, 8(sp)<br>	lw s3, 12(sp)<br>	addi sp, sp, 16<br>	ret<br><br>exit_38:<br>	li a0, 38<br>	j exit<br></code></pre></td></tr></table></figure>
+
+<p><strong>代码思路</strong></p>
+<ol>
+<li>首先，代码进行维度检查，确保输入矩阵的维度是有效的，如果任何一个维度小于1，则跳转到 <code>exit_38</code> 标签，终止程序。</li>
+<li>然后，代码初始化一些寄存器和变量，为循环做准备。<code>s0</code> 用于追踪当前行，<code>s1</code> 用于追踪当前列。</li>
+<li>进入外层循环 <code>outer_loop_start</code>，其中 <code>s0</code> 追踪矩阵 <code>m0</code> 的当前行。然后，进入内层循环 <code>inner_loop_start</code>，其中 <code>s1</code> 追踪矩阵 <code>m1</code> 的当前列。</li>
+<li>在内层循环内，首先保存寄存器上下文，然设置<code>dot</code>函数的参数。<code>a0</code>不变，计算 <code>a1</code> 的地址（<code>a1</code> 是矩阵 <code>m1</code> 当前列的起始地址），<code>a2</code>不变，设置 <code>a3</code> 为 1，将 <code>a4</code> 设置为矩阵 <code>m1</code> 的列数。</li>
+<li>调用 <code>dot</code> 函数，将矩阵 <code>m0</code> 的当前行和矩阵 <code>m1</code> 的当前列进行点积运算，结果保存在 <code>t1</code> 中。</li>
+<li>恢复寄存器上下文，然后将 <code>t1</code> 的值存储在结果矩阵 <code>d</code> 中的对应位置。</li>
+<li>内层循环结束后，增加 <code>s1</code> 的值，如果 <code>s1</code> 小于矩阵 <code>m1</code> 的列数，则继续内层循环。</li>
+<li>外层循环结束后，增加 <code>s0</code> 的值，然后将 <code>a0</code> 更新为下一行的起始地址。如果 <code>s0</code> 小于矩阵 <code>m0</code> 的行数，则继续外层循环。</li>
+<li>循环结束后，恢复寄存器上下文并返回。</li>
+<li>如果发现维度无效，则跳转到 <code>exit_38</code>，程序终止。</li>
+</ol>
+<p><strong>计算a1地址</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs assembly">addi t4, x0, 4<br>mul t4, t4, s1<br>add a1, a3, t4<br></code></pre></td></tr></table></figure>
+
+<p><strong>计算结果存储在结果矩阵d 的相对位置</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mul t2, s0, a5<br>add t2, t2, s1<br>addi t4, x0, 4<br>mul t2, t2, t4<br>add t2, a6, t2<br>sw t1, 0(t2)<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li><code>mul t2, s0, a5</code>: 这行代码计算了要存储的元素在结果矩阵 <code>d</code> 中的行号。<code>s0</code> 包含了当前正在计算的行号，而 <code>a5</code> 包含了矩阵 <code>m1</code> 的列数（也是结果矩阵 <code>d</code> 的列数）。将这两个值相乘，得到的结果存储在寄存器 <code>t2</code> 中。</li>
+<li><code>add t2, t2, s1</code>: 这行代码将刚刚计算的行号 <code>t2</code> 与当前正在计算的列号 <code>s1</code> 相加。这是为了计算出在结果矩阵 <code>d</code> 中的具体位置。</li>
+<li><code>addi t4, x0, 4</code>: 这行代码将立即数 4 存储在寄存器 <code>t4</code> 中。这是因为每个元素占用 4 个字节（假设是 32 位整数）。</li>
+<li><code>mul t2, t2, t4</code>: 这行代码将刚刚计算的位置 <code>t2</code> 与每个元素的大小相乘，以得到字节偏移量。</li>
+<li><code>add t2, a6, t2</code>: 这行代码将字节偏移量 <code>t2</code> 与结果矩阵 <code>d</code> 的起始地址相加，从而得到最终要存储的地址。</li>
+<li><code>sw t1, 0(t2)</code>: 这行代码使用 <code>sw</code> 指令，将点积运算的结果 <code>t1</code> 存储在刚刚计算出的地址上，从而将计算结果存储在结果矩阵 <code>d</code> 中的对应位置。</li>
+</ol>
+<p><strong>更新矩阵a0 的行指针，以便在下一次循环中处理下一行</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs assembly">addi t4, x0, 4<br>mul t0, t4, a2<br>add a0, a0, t0<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li><code>addi t4, x0, 4</code>: 这行代码将立即数 4 存储在寄存器 <code>t4</code> 中。这是因为每个元素占用 4 个字节（假设是 32 位整数）。</li>
+<li><code>mul t0, t4, a2</code>: 这行代码将刚刚存储在寄存器 <code>t4</code> 中的值（即每个元素的大小）与矩阵 <code>m0</code> 的列数 <code>a2</code> 相乘，得到的结果存储在寄存器 <code>t0</code> 中。这是为了计算当前行中下一个元素的偏移量。</li>
+<li><code>add a0, a0, t0</code>: 这行代码将刚刚计算出的偏移量 <code>t0</code> 加到矩阵 <code>m0</code> 的起始地址 <code>a0</code> 上，以更新行指针。这将使指针指向下一行的开头，以便在下一次循环中处理下一行</li>
+</ol>
+<h2 id="Part-B-File-Operations-and-Classification"><a href="#Part-B-File-Operations-and-Classification" class="headerlink" title="Part B: File Operations and Classification"></a>Part B: File Operations and Classification</h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Architecture/" class="category-chain-item">Architecture</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/cs61c/" class="print-no-link">#cs61c</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>cs61c-proj2</div>
+      <div>https://2333monster.github.io/2023/08/12/cs61c-proj2/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Titor</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年8月12日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/10/cs61c-lab02/" title="cs61c-lab02">
+                        <span class="hidden-mobile">cs61c-lab02</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"2333monster/blog-comments","repo-id":"R_kgDOKAS-Hg","category":"Announcements","category-id":"DIC_kwDOKAS-Hs4CYKXb","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
