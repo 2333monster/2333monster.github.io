@@ -104,8 +104,36 @@
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/jalr-fields.png">
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/usesofjalr.png">
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/summaryofsixformat.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Abstraction1.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/switch01.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/switch02.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/buildNand.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/clock01.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/circuit_delay.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/adder_circuit.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/register_circuit.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/state_elements.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Accumulator.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/register02.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/D_type_lock.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/D_type_Flip-flop.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/timing_of_ff.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/timing_of_ff01.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/timing_of_ff03.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/timing_of_ff02.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/timing_of_ff_example01.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/timing_of_ff_example02.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/timing_of_ff_example03.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/timing_of_ff_example04.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/timing_of_ff_example05.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/timing_of_ff_example06.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/max_clock_frequency.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/more_register_for_performance.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Finite_example.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Finite_example.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/FSM.png">
 <meta property="article:published_time" content="2023-08-09T06:43:40.000Z">
-<meta property="article:modified_time" content="2023-08-16T09:38:01.238Z">
+<meta property="article:modified_time" content="2023-08-24T07:12:32.058Z">
 <meta property="article:author" content="John Titor">
 <meta property="article:tag" content="cs61c">
 <meta name="twitter:card" content="summary_large_image">
@@ -304,7 +332,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k 字
+          4.3k 字
         
       </span>
     
@@ -315,7 +343,7 @@
         
         
         
-          29 分钟
+          37 分钟
         
       </span>
     
@@ -617,6 +645,130 @@
 <img src="/2023/08/09/cs61c-lec/usesofjalr.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
 
 <h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><img src="/2023/08/09/cs61c-lec/summaryofsixformat.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+
+
+<h1 id="Lec14-Intro-to-Synchronous-Digital-Systems"><a href="#Lec14-Intro-to-Synchronous-Digital-Systems" class="headerlink" title="Lec14 Intro to Synchronous Digital Systems"></a>Lec14 Intro to Synchronous Digital Systems</h1><p>之后制作risc-v processor</p>
+<img src="/2023/08/09/cs61c-lec/Abstraction1.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h2 id="risc-v-processor-is-a-Synchronous-Digital-System"><a href="#risc-v-processor-is-a-Synchronous-Digital-System" class="headerlink" title="risc-v processor is a Synchronous Digital System"></a>risc-v processor is a Synchronous Digital System</h2>
+
+<ul>
+<li>接下来学习基础block</li>
+</ul>
+<h2 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h2><img src="/2023/08/09/cs61c-lec/switch01.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<img src="/2023/08/09/cs61c-lec/switch02.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h2 id="Transistor"><a href="#Transistor" class="headerlink" title="Transistor"></a>Transistor</h2>
+
+<h2 id="使用晶体管构造Nand-block"><a href="#使用晶体管构造Nand-block" class="headerlink" title="使用晶体管构造Nand block"></a>使用晶体管构造Nand block</h2><img src="/2023/08/09/cs61c-lec/buildNand.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<div class="note note-info">
+            <p>是由于上下晶体管不同，组合出的效果，基于nand gate ，可以构造出<code>And</code>，<code>Or</code> , <code>Not</code></p>
+          </div>
+
+<h2 id="Clock-the-heart-of-the-system"><a href="#Clock-the-heart-of-the-system" class="headerlink" title="Clock : the heart of the system"></a>Clock : the heart of the system</h2><img src="/2023/08/09/cs61c-lec/clock01.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<blockquote>
+<p>信号组合</p>
+</blockquote>
+
+
+<h2 id="adder-propagation-delay-（加法传播延迟）"><a href="#adder-propagation-delay-（加法传播延迟）" class="headerlink" title="adder propagation delay （加法传播延迟）"></a>adder propagation delay （加法传播延迟）</h2><img src="/2023/08/09/cs61c-lec/circuit_delay.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h2 id="Two-Basic-Types-of-Circuits"><a href="#Two-Basic-Types-of-Circuits" class="headerlink" title="Two Basic Types of Circuits"></a>Two Basic Types of Circuits</h2>
+
+<blockquote>
+<p>adder circuit</p>
+</blockquote>
+<img src="/2023/08/09/cs61c-lec/adder_circuit.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<blockquote>
+<p>register circuit</p>
+</blockquote>
+<img src="/2023/08/09/cs61c-lec/register_circuit.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h1 id="Lec15-State-State-Machines"><a href="#Lec15-State-State-Machines" class="headerlink" title="Lec15 State, State Machines"></a>Lec15 State, State Machines</h1><h2 id="状态电路作用-state-elements"><a href="#状态电路作用-state-elements" class="headerlink" title="状态电路作用(state elements)"></a>状态电路作用(state elements)</h2><img src="/2023/08/09/cs61c-lec/state_elements.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h2 id="累加器（使用寄存器）"><a href="#累加器（使用寄存器）" class="headerlink" title="累加器（使用寄存器）"></a>累加器（使用寄存器）</h2><img src="/2023/08/09/cs61c-lec/Accumulator.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h2 id="寄存器详细"><a href="#寄存器详细" class="headerlink" title="寄存器详细"></a>寄存器详细</h2><img src="/2023/08/09/cs61c-lec/register02.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<blockquote>
+<p>D Type Flip-flop</p>
+</blockquote>
+<img src="/2023/08/09/cs61c-lec/D_type_lock.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<img src="/2023/08/09/cs61c-lec/D_type_Flip-flop.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h2 id="触发器内部时间节点"><a href="#触发器内部时间节点" class="headerlink" title="触发器内部时间节点"></a>触发器内部时间节点</h2><img src="/2023/08/09/cs61c-lec/timing_of_ff.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<blockquote>
+<p>在时钟的上升沿，对输入 d 进行采样并传输到输出。 在所有其他时间，输入d 被忽略。</p>
+</blockquote>
+<img src="/2023/08/09/cs61c-lec/timing_of_ff01.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<div class="note note-info">
+            <p>在时钟上升边沿前，输入必须保持有效的最短时间为 <strong>建立时间</strong></p><p>在时钟上升边沿后，必须保持有效的最短时间为 <strong>保持时间</strong></p>
+          </div>
+
+<img src="/2023/08/09/cs61c-lec/timing_of_ff03.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<img src="/2023/08/09/cs61c-lec/timing_of_ff02.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h2 id="Accumulator-例子详细分析时间点"><a href="#Accumulator-例子详细分析时间点" class="headerlink" title="Accumulator 例子详细分析时间点"></a>Accumulator 例子详细分析时间点</h2><img src="/2023/08/09/cs61c-lec/timing_of_ff_example01.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<ol>
+<li>reset $S_{i-1}$</li>
+</ol>
+<img src="/2023/08/09/cs61c-lec/timing_of_ff_example02.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<ol start="2">
+<li>add $S_{i-1}$ &amp; $x_i$  加法传播延时</li>
+</ol>
+<img src="/2023/08/09/cs61c-lec/timing_of_ff_example03.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<ol start="3">
+<li>sample from $S_i$ to $S_{i-1}$</li>
+</ol>
+ <img src="/2023/08/09/cs61c-lec/timing_of_ff_example04.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<ol start="4">
+<li>add $S_{i-1}$ &amp; $x_i$ again，但是此时会出现 $x_0 + x_0$ 的 <code>wrong value</code></li>
+</ol>
+ <img src="/2023/08/09/cs61c-lec/timing_of_ff_example05.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<ol start="5">
+<li>虽然出现<code>wrong value</code> 但是，由于clk smaple 之前留有足够的时间 set up，所以最终会是准确值</li>
+</ol>
+ <img src="/2023/08/09/cs61c-lec/timing_of_ff_example06.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<div class="note note-info">
+            <p>所以超频系统容易出现错误，超频时，黄线收缩（周期减小），最终没有时间稳定set up，sample <code>wrong value</code> </p>
+          </div>
+
+<h2 id="最大CLK-频率"><a href="#最大CLK-频率" class="headerlink" title="最大CLK 频率"></a>最大CLK 频率</h2> <img src="/2023/08/09/cs61c-lec/max_clock_frequency.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h2 id="Pipeline-提高表现"><a href="#Pipeline-提高表现" class="headerlink" title="Pipeline 提高表现"></a>Pipeline 提高表现</h2><p>为了效率，clk 的周期不能设置的无限长，当任务量过大时，一个周期可能完不成（受限于类似adder propagation delay 这样的原因）</p>
+<p>所以我们使用多个寄存器分步（管道）完成任务，每个周期完成一部分。</p>
+ <img src="/2023/08/09/cs61c-lec/more_register_for_performance.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h2 id="Finite-State-Machine-有限状态机器"><a href="#Finite-State-Machine-有限状态机器" class="headerlink" title="Finite State Machine (有限状态机器)"></a>Finite State Machine (有限状态机器)</h2> <img src="/2023/08/09/cs61c-lec/Finite_example.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<ul>
+<li>状态转移图有一个输入端<ul>
+<li>外部箭头，或者某个状态双圆圈表示</li>
+</ul>
+</li>
+<li>每个状态都有两个可能输入状态，两个可能输出状态</li>
+</ul>
+ <img src="/2023/08/09/cs61c-lec/Finite_example.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<p>由state elements 和 combinational logic block 构成 FSM</p>
+ <img src="/2023/08/09/cs61c-lec/FSM.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+
                 
               </div>
             
