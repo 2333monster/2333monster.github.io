@@ -143,6 +143,7 @@
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/majority_circuit02.png">
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/FSM02.png">
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/BA01.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/BA02.png">
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/canonical_forms01.png">
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/canonical_forms02.png">
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/TT_BA_BG.png">
@@ -158,8 +159,26 @@
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Adder03.png">
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Adder04.png">
 <meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Adder05.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Processor_Memory.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/CPU01.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Datapath01.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Datapath02.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Datapath03.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Datapath04.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Datapath05.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Datapath06.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/Datapath07.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/R_type_Datapath01.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/R_type_Datapath02.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/R_type_Datapath03.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/R_type_Datapath04.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/I_type_Datapath01.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/I_type_Datapath02.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/I_type_Datapath03.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/I_type_Datapath04.png">
+<meta property="og:image" content="https://2333monster.github.io/2023/08/09/cs61c-lec/I_type_Datapath05.png">
 <meta property="article:published_time" content="2023-08-09T06:43:40.000Z">
-<meta property="article:modified_time" content="2023-08-25T05:50:06.766Z">
+<meta property="article:modified_time" content="2023-09-12T12:22:47.624Z">
 <meta property="article:author" content="John Titor">
 <meta property="article:tag" content="cs61c">
 <meta name="twitter:card" content="summary_large_image">
@@ -358,7 +377,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.9k 字
+          5.5k 字
         
       </span>
     
@@ -369,7 +388,7 @@
         
         
         
-          41 分钟
+          47 分钟
         
       </span>
     
@@ -822,6 +841,8 @@
 </blockquote>
  <img src="/2023/08/09/cs61c-lec/majority_circuit01.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
 
+
+
 <blockquote>
 <p>FSM</p>
 </blockquote>
@@ -840,7 +861,7 @@
 </ul>
  <img src="/2023/08/09/cs61c-lec/BA01.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
 
-<h2 id="Laws-of-BA"><a href="#Laws-of-BA" class="headerlink" title="Laws of BA"></a>Laws of BA</h2> 
+<h2 id="Laws-of-BA"><a href="#Laws-of-BA" class="headerlink" title="Laws of BA"></a>Laws of BA</h2> <img src="/2023/08/09/cs61c-lec/BA02.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
 
 <h2 id="Canonical-forms-范式"><a href="#Canonical-forms-范式" class="headerlink" title="Canonical forms (范式)"></a>Canonical forms (范式)</h2> <img src="/2023/08/09/cs61c-lec/canonical_forms01.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
 
@@ -906,6 +927,95 @@
 <p>subtractor</p>
 </blockquote>
 
+
+<h1 id="Lec18-Single-Cycle-CPU-Datapath-I-09-12"><a href="#Lec18-Single-Cycle-CPU-Datapath-I-09-12" class="headerlink" title="Lec18 Single-Cycle CPU Datapath I [09&#x2F;12]"></a>Lec18 Single-Cycle CPU Datapath I [09&#x2F;12]</h1><h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><blockquote>
+<p>回顾架构</p>
+</blockquote>
+<img src="/2023/08/09/cs61c-lec/Processor_Memory.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<blockquote>
+<p>cpu 包含 datapath 和 control</p>
+</blockquote>
+<img src="/2023/08/09/cs61c-lec/CPU01.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h2 id="Datapath"><a href="#Datapath" class="headerlink" title="Datapath"></a>Datapath</h2><h3 id="Five-Stages-of-the-Datapath"><a href="#Five-Stages-of-the-Datapath" class="headerlink" title="Five Stages of the Datapath"></a>Five Stages of the Datapath</h3><blockquote>
+<p>excute an instruction </p>
+</blockquote>
+<img src="/2023/08/09/cs61c-lec/Datapath01.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<blockquote>
+<p>基础结构，包含pc，mux，reg[]，DMEM，IMEM，ALU</p>
+<p>在一个周期中执行完5个阶段 -&gt; single-cycle cpu</p>
+</blockquote>
+<img src="/2023/08/09/cs61c-lec/Datapath02.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h3 id="Datapath-Elements-register"><a href="#Datapath-Elements-register" class="headerlink" title="Datapath Elements: register"></a>Datapath Elements: register</h3><img src="/2023/08/09/cs61c-lec/Datapath03.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<blockquote>
+<p>register file 包含32 个 register 结构</p>
+<p>register 两个进线，一个出线</p>
+</blockquote>
+<img src="/2023/08/09/cs61c-lec/Datapath04.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h3 id="Datapath-Elements-Memory"><a href="#Datapath-Elements-Memory" class="headerlink" title="Datapath Elements: Memory"></a>Datapath Elements: Memory</h3><img src="/2023/08/09/cs61c-lec/Datapath05.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h3 id="State-：Reg-file-pc-Mem-Imem-Dmem"><a href="#State-：Reg-file-pc-Mem-Imem-Dmem" class="headerlink" title="State ：Reg_file, pc, Mem(Imem, Dmem)"></a>State ：Reg_file, pc, Mem(Imem, Dmem)</h3><img src="/2023/08/09/cs61c-lec/Datapath06.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<img src="/2023/08/09/cs61c-lec/Datapath07.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h2 id="R-Type-Datapath"><a href="#R-Type-Datapath" class="headerlink" title="R-Type Datapath"></a>R-Type Datapath</h2><blockquote>
+<p>完成R型指令的Datapath 构造</p>
+</blockquote>
+<ul>
+<li>指令对机器的状态有两个改变<ul>
+<li>Reg[rd] &#x3D; Reg[rs1] + Reg[rs2]</li>
+<li>PC &#x3D; PC + 4</li>
+</ul>
+</li>
+</ul>
+<img src="/2023/08/09/cs61c-lec/R_type_Datapath01.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h3 id="add-datapath"><a href="#add-datapath" class="headerlink" title="add datapath"></a>add datapath</h3><img src="/2023/08/09/cs61c-lec/R_type_Datapath02.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<ul>
+<li>Timing for add datapath</li>
+</ul>
+<img src="/2023/08/09/cs61c-lec/R_type_Datapath03.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h3 id="sub-datapath"><a href="#sub-datapath" class="headerlink" title="sub datapath"></a>sub datapath</h3><blockquote>
+<p>跟add 几乎相同，除了执行的是sub 而不是add</p>
+<p>设置一个ALUsel 选择执行sub 或是add 即可</p>
+</blockquote>
+<ul>
+<li>inst[30] selects between add and subtract，两个的opcode 相同</li>
+</ul>
+<img src="/2023/08/09/cs61c-lec/R_type_Datapath04.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<div class="note note-info">
+            <p>其他的R-Type相似，只需要更改ALUsel 即可</p>
+          </div>
+
+<h2 id="I-Type-Datapath"><a href="#I-Type-Datapath" class="headerlink" title="I-Type Datapath"></a>I-Type Datapath</h2><blockquote>
+<p>I type instructions </p>
+</blockquote>
+<img src="/2023/08/09/cs61c-lec/I_type_Datapath01.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<blockquote>
+<p>由于I型相比R型少了rs2，多了一个immediate</p>
+<p>我们要修改下面的地方</p>
+</blockquote>
+<img src="/2023/08/09/cs61c-lec/I_type_Datapath02.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<p>修改后</p>
+<img src="/2023/08/09/cs61c-lec/I_type_Datapath03.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<h3 id="Imm-Gen"><a href="#Imm-Gen" class="headerlink" title="Imm.Gen"></a>Imm.Gen</h3><img src="/2023/08/09/cs61c-lec/I_type_Datapath04.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
+
+<div class="note note-info">
+            <p>其他的I-Type相似，只需要更改ALUsel 即可</p>
+          </div>
+
+<img src="/2023/08/09/cs61c-lec/I_type_Datapath05.png" srcset="/img/loading.gif" lazyload class="png" title="examplename">
 
                 
               </div>
